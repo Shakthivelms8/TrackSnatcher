@@ -1,69 +1,106 @@
-# 🎵 Spotify Playlist to MP3 Downloader
+# 🎵 SpotMP3 - Spotify Playlist to MP3 Downloader
 
-This project fetches all the tracks from a **public Spotify playlist** and downloads them as `.mp3` files using `yt-dlp`, saving them neatly inside a `songs/` folder.
-
-## 🚀 Features
-
-- Fetches songs from any **public Spotify playlist**.
-- Searches for each song on **YouTube** and downloads the best audio.
-- Converts audio files to **MP3 format** (192 kbps).
-- **Skips already-downloaded songs** to avoid duplicates.
-- Automatically organizes downloads into a `songs/` folder.
+SpotMP3 is a Python tool that lets you download songs from a **public Spotify playlist** by searching and fetching them from **YouTube**, then converting them to **MP3 format** using `yt-dlp` and `ffmpeg`.
 
 ---
 
-## 🛠️ Setup Instructions
+## 🚀 Features
+
+- 🔗 Fetch tracks from any public Spotify playlist  
+- 🔍 Automatically search songs on YouTube  
+- ⬇️ Downloads and converts to high-quality MP3  
+- 📂 Stores all songs neatly in a `songs/` folder  
+- 🧠 Skips songs that already exist locally  
+
+---
+
+## 🛠️ Requirements
+
+- Python 3.8+
+- [yt-dlp](https://github.com/yt-dlp/yt-dlp)
+- [ffmpeg](https://ffmpeg.org/)
+- [spotipy](https://spotipy.readthedocs.io/)
+- [pydub](https://github.com/jiaaro/pydub)
+
+---
+
+## 🔧 Setup Instructions
 
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/spotify-playlist-mp3-downloader.git
-cd spotify-playlist-mp3-downloader
+git clone https://github.com/yourusername/SpotMP3.git
+cd SpotMP3
+2. Create and Activate a Virtual Environment
+bash
+Copy
+Edit
+# On Windows
+python -m venv venv
+venv\Scripts\activate
 
-2. Install Python Dependencies
-Make sure you're using Python 3.8 or later.
+# On macOS/Linux
+python3 -m venv venv
+source venv/bin/activate
+3. Install Python Dependencies
+bash
+Copy
+Edit
+pip install -r requirements.txt
+Or manually:
 
 bash
 Copy
 Edit
 pip install spotipy yt-dlp pydub
-3. Install FFmpeg
-This is required for audio conversion.
-
-Windows (Using winget)
+📦 Install FFmpeg
+Option 1: Using Winget (Recommended for Windows 10/11)
 bash
 Copy
 Edit
 winget install ffmpeg
-Then, add the ffmpeg bin folder to your environment variables.
+Option 2: Manual Download
+Go to https://www.gyan.dev/ffmpeg/builds/
 
-Example path (adjust if needed):
+Download the Full build
 
-makefile
-Copy
-Edit
-C:\Users\<your-username>\AppData\Local\Microsoft\WinGet\Packages\Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe\ffmpeg-7.1.1-full_build\bin
-Restart your terminal after adding to the PATH.
+Extract it and add the bin/ path to your system's Environment Variables > PATH
 
-🔑 Spotify API Credentials
-Go to the Spotify Developer Dashboard.
+✅ Ensure both ffmpeg and ffprobe are accessible from your terminal/PowerShell.
 
-Create an app to get your Client ID and Client Secret.
-
-Paste them in the script:
-
-python
-Copy
-Edit
-SPOTIFY_CLIENT_ID = 'your-client-id'
-SPOTIFY_CLIENT_SECRET = 'your-client-secret'
-PLAYLIST_ID = 'your-playlist-id'
-You can find the playlist ID from the URL:
-https://open.spotify.com/playlist/01Uw1umqVhj3PTDPmkw25i → 01Uw1umqVhj3PTDPmkw25i
-
-▶️ Run the Script
+📂 Folder Structure
 bash
 Copy
 Edit
-python download_songs.py
-All downloaded .mp3 files will be saved in the songs/ folder.
+project/
+│
+├── songs/               # All MP3s downloaded go here
+├── downloader.py        # Your main script
+└── README.md            # This file
+🧪 How It Works
+Authenticates using Spotify's public API.
+
+Fetches all track names + artists from a playlist.
+
+Searches for each song on YouTube via yt-dlp.
+
+Downloads the best audio format.
+
+Converts the result to .mp3 using ffmpeg.
+
+Skips songs already downloaded.
+
+🚀 Run the Script
+bash
+Copy
+Edit
+python downloader.py
+🧾 Example Output
+less
+Copy
+Edit
+Found 11 tracks in the playlist.
+Searching & downloading: Time in a Bottle Jim Croce
+Downloading...
+Converting to MP3...
+Saved to /songs/
